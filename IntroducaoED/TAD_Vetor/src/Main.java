@@ -63,6 +63,7 @@ public class Main {
 
             int resp = sc.nextInt();
             if(resp == 0){
+                sc.close();
                 break;
             }else if(resp == 1){
                 System.out.println("digite um numero: ");
