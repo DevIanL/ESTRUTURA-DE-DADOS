@@ -10,6 +10,7 @@ public class Usuario {
     public Usuario(String tipo, String matricula, String senha){
         validarMatricula(matricula);
         validarSenha(senha);
+        validarTipo(tipo);
 
         this.tipo = tipo;
         this.matricula = matricula;
@@ -41,6 +42,12 @@ public class Usuario {
             }
 
             throw new FormatacaoSenhaInvalidaException(erro);
+        }
+    }
+
+    private void validarTipo(String tipo){
+        if(!tipo.equalsIgnoreCase("Aluno") && !tipo.equalsIgnoreCase("Professor") && !tipo.equalsIgnoreCase("Administrador")){
+            throw new FormatacaoTipoInvalidoException("Tipo de usuario inexistente.");
         }
     }
 

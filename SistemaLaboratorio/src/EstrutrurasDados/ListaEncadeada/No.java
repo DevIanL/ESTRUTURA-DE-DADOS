@@ -1,6 +1,6 @@
 package EstrutrurasDados.ListaEncadeada;
 
-public class No <E>{
+public class No<E>{
     
     private E dado;
     private No<E> anterior;
@@ -12,27 +12,27 @@ public class No <E>{
         anterior = null;
     }
 
-    public E get_dado(){
+    public E getDado(){
         return dado;
     }
 
-    public No<E> get_proximo(){
+    public No<E> getProximo(){
         return proximo;
     }
 
-    public No<E> get_anterior(){
+    public No<E> getAnterior(){
         return anterior;
     }
 
-    public void set_proximo(No<E> no){
+    public void setProximo(No<E> no){
         proximo = no;
     }
 
-    public void set_anterior(No<E> no){
+    public void setAnterior(No<E> no){
         anterior = no;
     }
 
-    public void set_dado(E dado){
+    public void setDado(E dado){
         this.dado = dado;
     }
 }
