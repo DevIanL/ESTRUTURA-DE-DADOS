@@ -1,6 +1,8 @@
 package Sistema;
 
 import java.util.Scanner;
+import Excecoes.FormatacaoMatriculaInvalidaException;
+import Excecoes.FormatacaoSenhaInvalidaException;
 
 public class Main {
     public static void main(String[] args){
@@ -10,12 +12,12 @@ public class Main {
         
         while (true) {
             System.out.println();
-            System.out.println("------ SISTEMA LABORATÓRIO ------");
-            System.out.println("--  1) Fazer Login             --");
-            System.out.println("--  2) Fazer Cadastro          --");
-            System.out.println("--                             --");
-            System.out.println("--  0) Encerrar Programa       --");
-            System.out.println("---------------------------------");
+            System.out.println("------ SISTEMA LABORATÓRIO (LOGIN/CADASTRO) ------");
+            System.out.println("--  1) Fazer Login                              --");
+            System.out.println("--  2) Fazer Cadastro                           --");
+            System.out.println("--                                              --");
+            System.out.println("--  0) Encerrar Programa                        --");
+            System.out.println("--------------------------------------------------");
             System.out.println();
 
             opcao = sc.nextInt();
@@ -25,11 +27,87 @@ public class Main {
                 break;
 
             }else if(opcao == 1){
-                lg.logar(sc);
+                String matricula = null;
+                String senha = null;
+                String tipo = null;
+                TipoUsuario tipoLimpo = null;
+                boolean entradaValida = false;
+
+                do {
+                    System.out.print("\nTipo da sua conta: (Aluno/Professor/Administrador) ");
+                    tipo = sc.nextLine().trim().toUpperCase();
+
+                    try{
+                        tipoLimpo = TipoUsuario.valueOf(tipo);
+                        entradaValida = true;
+
+                    }catch(IllegalArgumentException e){
+                        System.out.println("Tipo Invalido. ");
+                    }
+                } while (!entradaValida);
+ 
+                entradaValida = false;
+
+                do{
+                    System.out.print("Sua Matricula: ");
+                    matricula = sc.nextLine();
+                    System.out.print("Sua Senha: ");
+                    senha = sc.nextLine();
+
+                    try{
+                        lg.logar(tipoLimpo,matricula, senha);
+                        entradaValida = true;
+
+                    }catch(FormatacaoMatriculaInvalidaException e){
+                        System.out.println(e.getMessage());
+                        System.err.println();
+
+                    }catch(FormatacaoSenhaInvalidaException e){
+                        System.out.println(e.getMessage());
+                        System.err.println();
+                    }
+                }while(!entradaValida);
 
             }else if(opcao == 2){
-                lg.cadastrar(sc);
-                
+                String matricula = null;
+                String senha = null;
+                String tipo = null;
+                TipoUsuario tipoLimpo = null;
+                boolean entradaValida = false;
+
+                do {
+                    System.out.print("\nTipo da conta: (Aluno/Professor/Administrador) ");
+                    tipo = sc.nextLine().trim().toUpperCase();
+
+                    try{
+                        tipoLimpo = TipoUsuario.valueOf(tipo);
+                        entradaValida = true;
+
+                    }catch(IllegalArgumentException e){
+                        System.out.println("Tipo Invalido. ");
+                    }
+                } while (!entradaValida);
+               
+                entradaValida = false;
+
+                do{
+                    System.out.print("Sua Matricula: ");
+                    matricula = sc.nextLine();
+                    System.out.print("\nCrie uma senha: (Deve conter: Letra Maiuscula; Numero; Caracter especial(!@#$%&*); Pelo menos 8 caracteres.) ");
+                    senha = sc.nextLine();
+
+                    try{
+                        lg.cadastrar(tipoLimpo, matricula, senha);
+                        entradaValida = true;
+                    }catch(FormatacaoMatriculaInvalidaException e){
+                        System.out.println(e.getMessage());
+                        System.err.println();
+
+                    }catch(FormatacaoSenhaInvalidaException e){
+                        System.out.println(e.getMessage());
+                        System.err.println();
+                    }  
+                }while(!entradaValida);
             }
         }
 

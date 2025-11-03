@@ -1,7 +1,6 @@
 package Sistema;
 
 import EstrutrurasDados.ListaEncadeada.ListaEncadeada;
-import java.util.Scanner;
 
 public class Login {
     private ListaEncadeada<Usuario> listaLogin;
@@ -10,86 +9,65 @@ public class Login {
         listaLogin = new ListaEncadeada<>();
     }
 
-    public boolean verificarUsuario(String a){
+    public boolean verificarEspaco(Usuario a){
         int aux = 0;
         
         for(Usuario i : listaLogin){
-            if(a.equals(i.getMatricula())){
-                aux++;
+            if(a.getMatricula().equals(i.getMatricula())){
+                if(a.getTipo() == i.getTipo()){
+                    aux++;
+                }  
             }
         } 
 
         return aux == 0;
     }
 
-    public Usuario logar(Scanner sc){
+    public Usuario logar(TipoUsuario tipo, String matricula, String senha){
         Usuario usuario = null;
-        String matricula = null;
-        String senha = null;
-
-        System.out.print("Sua Matricula: ");
-        matricula = sc.nextLine();
-        System.out.print("\nSua Senha: ");
-        senha = sc.nextLine();
+        int aux = 0;
 
         if(listaLogin.isEmpty()){
             System.out.println("Senha ou Usuario invalido.");
-        }
-
-        if(!verificarUsuario(matricula)){
+        }else{
             for(Usuario a : listaLogin){
-                if(matricula.equals(a.getMatricula())){
+                if(matricula.equals(a.getMatricula()) && tipo.equals(a.getTipo())){
                     if(senha.equals(a.getSenha())){
+                        aux++;
                         usuario = a;
                         System.out.println("Logado com sucesso.");
                         break;
                     }else{
+                        aux++;
                         System.out.println("Senha ou Usuario invalido.");
                         break;
                     }
                 }
             }
-        }else{
-            System.out.println("Senha ou Usuario invalido.");
+            
+            if(aux == 0){
+                System.out.println("Senha ou Usuario invalido.");
+            }
         }
 
         return usuario;
     }
     
 
-    public void cadastrar(Scanner sc){
+    public void cadastrar(TipoUsuario tipo, String matricula, String senha){
         Usuario usuario = null;
-        String matricula = null;
-        String senha = null;
-        String tipo = null;
-
-        System.out.print("\nTipo da conta: (Aluno/Professor/Administrador) ");
-        tipo = sc.nextLine().toLowerCase();
 
         switch (tipo) {
-            case "aluno":
-                System.out.print("Sua Matricula: ");
-                matricula = sc.nextLine();
-                System.out.print("\nCrie uma senha: (Deve conter: Letra Maiuscula; Numero; Caracter especial(!@#$%&*); Pelo menos 8 caracteres.) ");
-                senha = sc.nextLine();
-
+            case ALUNO:
                 usuario = new Aluno(matricula, senha);
                 break;
         
-            case "professor": 
-                System.out.print("Sua Matricula: ");
-                matricula = sc.nextLine();
-                System.out.print("\nCrie uma senha: (Deve conter: Letra Maiuscula; Numero; Caracter especial(!@#$%&*); Pelo menos 8 caracteres.) ");
-                senha = sc.nextLine(); 
+            case PROFESSOR: 
 
                 usuario = new Professor(matricula, senha);
                 break;
                 
-            case "administrador":
-                System.out.print("Sua Matricula: ");
-                matricula = sc.nextLine();
-                System.out.print("\nCrie uma senha: (Deve conter: Letra Maiuscula; Numero; Caracter especial(!@#$%&*); Pelo menos 8 caracteres.) ");
-                senha = sc.nextLine();
+            case ADMINISTRADOR:
 
                 usuario = new Administrador(matricula, senha);
                 break;
@@ -98,7 +76,7 @@ public class Login {
                 System.out.println("Tipo invalido");
         }
 
-        if (verificarUsuario(usuario.getMatricula())) {
+        if (verificarEspaco(usuario)) {
             listaLogin.add(usuario);
         }else{
             System.out.println("Usuario ja existe.");

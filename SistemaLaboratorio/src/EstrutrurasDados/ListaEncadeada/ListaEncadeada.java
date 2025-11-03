@@ -39,7 +39,8 @@ public class ListaEncadeada<E> implements Lista<E>, Iterable<E>{
                 }
                 
                 if(aux.getProximo() == null){
-                    throw new ParametroNaoValidoException("Elemento não encontrado.");
+                    index = -1;
+                    break;
                 }
 
                 aux = aux.getProximo();
