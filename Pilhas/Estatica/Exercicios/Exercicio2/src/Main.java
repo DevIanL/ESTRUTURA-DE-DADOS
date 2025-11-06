@@ -16,7 +16,7 @@ public class Main {
             
             j1.tela();
             System.out.println();
-            System.out.println();
+            System.out.println();  
             System.out.println("TRANSFERIR: ");
             System.out.println("1) DA PILHA 1 PARA A PILHA 2");
             System.out.println("2) DA PILHA 2 PARA A PILHA 1");            

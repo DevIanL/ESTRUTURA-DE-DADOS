@@ -45,7 +45,7 @@ public class Pilha {
 
     public void inserir(int elemento){
         int aux = 0;
-        if(topo != tamanho -1){
+        if(topo != tamanho -1){  
             if(!repetir()){
                 for(int i=topo +1; i>=0; i--){
                     if(pilha[i] == elemento){

@@ -62,7 +62,7 @@ public class Main {
                 System.out.println(p1.localizar_elemento(e));
 
             }else if (opcao == 6) {
-                System.out.println(p1.imprimir()); 
+                System.out.println(p1.imprimir());   
                 
             }
         }

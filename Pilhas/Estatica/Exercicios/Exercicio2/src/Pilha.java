@@ -29,7 +29,7 @@ public class Pilha {
         for(int i=0; i<=topo; i++){
             retorno += pilha[i];
         }
-
+  
         return retorno;
     }
 

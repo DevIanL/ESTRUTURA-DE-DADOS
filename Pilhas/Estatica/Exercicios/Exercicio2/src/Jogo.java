@@ -69,7 +69,7 @@ public class Jogo {
             if(a.verificarOrdenacao() && b.verificarOrdenacao()){
                 retorno = false;
             }
-        }
+        }  
         
         return retorno;
     }
