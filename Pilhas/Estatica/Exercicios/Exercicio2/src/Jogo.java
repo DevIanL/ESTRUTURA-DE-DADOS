@@ -61,4 +61,16 @@ public class Jogo {
         System.out.println("PILHA 2: "+ b.imprimir());
         System.out.println("PILHA 3: "+ c.imprimir());
     }
+
+    public boolean fimJogo(Pilha a, Pilha b){
+        boolean retorno = true;
+    
+        if (a.esta_cheio() && b.esta_cheio()) {
+            if(a.verificarOrdenacao() && b.verificarOrdenacao()){
+                retorno = false;
+            }
+        }
+        
+        return retorno;
+    }
 }

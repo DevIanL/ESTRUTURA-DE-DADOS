@@ -15,12 +15,32 @@ public class Pilha {
         pilha = new int[tamanho];
     }
 
-    private boolean esta_cheio(){
+    public boolean esta_cheio(){
         return topo == pilha.length -1;
     }
 
-    private boolean esta_vazio(){
+    public boolean esta_vazio(){
         return topo == -1;
+    }
+
+    public int somaAll(){
+        int retorno = 0;
+
+        for(int i=0; i<=topo; i++){
+            retorno += pilha[i];
+        }
+
+        return retorno;
+    }
+
+    public boolean verificarOrdenacao(){
+        for(int i=0; i<topo; i++){
+            if(pilha[i] > pilha [i+1]){
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public void adicionar(int dado){

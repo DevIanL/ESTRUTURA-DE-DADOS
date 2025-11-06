@@ -24,13 +24,15 @@ public class Pilha {
         return topo;
     }
 
-    public int localizar_elemento(int elemento){
+    public String localizar_elemento(int elemento){
+        String retorno = "";
+
         for(int i=topo; i>=0; i--){
             if(pilha[i] == elemento){
-                return i;
+                retorno += " " + i;
             }
         }
-        return -1;
+        return "["+retorno+"]";
     }
     
     public void set_repetir(int a){

@@ -47,17 +47,23 @@ public class Main {
             }else if(opcao == 1){
                 int e = sc.nextInt();
                 p1.inserir(e);
+
             }else if(opcao == 2){
                 System.out.println(p1.remover()); 
+
             }else if(opcao == 3){
                 System.out.println(p1.get_elements()); 
+
             }else if(opcao == 4){
                 System.out.println(p1.get_topo()); 
+
             }else if(opcao == 5){
                 int e = sc.nextInt();
                 System.out.println(p1.localizar_elemento(e));
+
             }else if (opcao == 6) {
                 System.out.println(p1.imprimir()); 
+                
             }
         }
     }

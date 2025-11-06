@@ -1,4 +1,4 @@
-package Pilhas.Estatica.Exercicios.Exercicio2.src;
+ package Pilhas.Estatica.Exercicios.Exercicio2.src;
 
 import java.util.Scanner;
 
@@ -12,8 +12,10 @@ public class Main {
         
         Jogo j1 = new Jogo(p1, p2, p3);
 
-        while (true) {
+        while (j1.fimJogo(p1, p2)) {
+            
             j1.tela();
+            System.out.println();
             System.out.println();
             System.out.println("TRANSFERIR: ");
             System.out.println("1) DA PILHA 1 PARA A PILHA 2");
@@ -44,5 +46,10 @@ public class Main {
                 j1.transferirDaPilha3ParaPilha2();
             }
         }
+
+        j1.tela();
+        System.out.println();
+        System.out.println(p1.somaAll());
+        System.out.println(p2.somaAll());
     }
 }
