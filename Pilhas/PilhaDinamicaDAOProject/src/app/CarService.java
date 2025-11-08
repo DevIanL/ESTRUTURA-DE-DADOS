@@ -24,6 +24,7 @@ public class CarService {
             System.out.println("1) ADICIONAR CARRO.");
             System.out.println("2) RETORNAR CARRO PELA PLACA.");
             System.out.println("3) RETORNAR ARRAY DE CARROS.");
+            System.out.println("4) DELETAR CARRO PELA PLACA.");
             System.out.println();
             System.out.println("0) ENCERRAR.");
             System.out.println();
@@ -122,6 +123,42 @@ public class CarService {
                     }
 
                     System.out.println("["+array+"]");
+                    break;
+
+                case 4:
+                    String placa2 = null;  
+                    Car carro1 = null;
+
+                    do {
+                        System.out.print("Digite a placa do carro: ");
+                        placa2 = sc.nextLine();
+                        System.out.println();
+
+                        try{
+                            carro1 = servicoCarro.deleteCar(placa2);
+                            verificacao = true;
+
+                        } catch (IllegalArgumentException e) {
+                            System.out.println(e.getMessage());
+                            System.out.println();
+
+                        }catch(RuntimeException e){
+                            System.out.println(e.getMessage());
+                            System.out.println();
+                            break;
+                        }
+
+                    } while (!verificacao);
+                    
+                    verificacao = false;
+
+                    if(carro1 == null){
+                        break;
+                    }
+
+                    System.out.println("Carro: " + carro1.getMark() + ", " + carro1.getModel() + ". Placa: " + placa2 + " foi removido.");
+                    System.out.println();
+                    break;
             }
             
             if(opc == 0){

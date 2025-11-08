@@ -19,21 +19,19 @@ public class CarDAOPilhaDinamica implements CarDAO{
 
         if(!carros.isEmpty()){
             PilhaDinamica<Car> pilhaAuxiliar = new PilhaDinamica<>();
-            PilhaDinamica<Car> pilhaAuxiliar2 = new PilhaDinamica<>();
 
             while(!carros.isEmpty()){
                 if(carros.get().getLicensePlate().equals(plateLicense)){
                     retorno = carros.get();
+                    break;
                 }
                 
                 pilhaAuxiliar.empilhar(carros.desempilhar());
             }
 
             while(!pilhaAuxiliar.isEmpty()){
-                pilhaAuxiliar2.empilhar(pilhaAuxiliar.desempilhar());
+                carros.empilhar(pilhaAuxiliar.desempilhar());
             }
-
-            carros = pilhaAuxiliar2;
 
             if(retorno == null){
                 throw new IllegalArgumentException("Placa não encontrada.");
@@ -67,7 +65,7 @@ public class CarDAOPilhaDinamica implements CarDAO{
             }
             
         }else{
-            throw new RuntimeException("Pilha vazia.");
+            throw new RuntimeException("Pilha de carros vazia.");
         }
 
         return arrayCarros;
@@ -75,12 +73,39 @@ public class CarDAOPilhaDinamica implements CarDAO{
 
     @Override
     public void updateCar(Car newCar) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        carros.atualizar(newCar);
     }
 
     @Override
     public Car deleteCar(String plateLicense) {
-        throw new UnsupportedOperationException("Operação ainda não implementada");
+        Car retorno = null;
+
+        if(!carros.isEmpty()){
+            PilhaDinamica<Car> pilhaAuxiliar = new PilhaDinamica<>();
+
+            while(!carros.isEmpty()){
+                if(carros.get().getLicensePlate().equals(plateLicense)){
+                    retorno = carros.get();
+                    carros.desempilhar();
+                    break;
+                }
+
+                pilhaAuxiliar.empilhar(carros.desempilhar());
+            }
+
+            while (!pilhaAuxiliar.isEmpty()) {
+                carros.empilhar(pilhaAuxiliar.desempilhar());
+            }
+
+            if(retorno == null){
+                throw new IllegalArgumentException("Placa não encontrada.");
+            }
+
+        }else{
+            throw new RuntimeException("Pilha de carros vazia.");
+        }
+
+        return retorno;
     }
 
     // Operações de consulta específicas para carros
