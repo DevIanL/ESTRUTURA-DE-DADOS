@@ -32,6 +32,7 @@ public class Main {
                 String tipo = null;
                 TipoUsuario tipoLimpo = null;
                 boolean entradaValida = false;
+                Usuario usuarioLogado = null;
 
                 do {
                     System.out.print("\nTipo da sua conta: (Aluno/Professor/Administrador) ");
@@ -55,7 +56,7 @@ public class Main {
                     senha = sc.nextLine();
 
                     try{
-                        lg.logar(tipoLimpo,matricula, senha);
+                        usuarioLogado = lg.logar(tipoLimpo,matricula, senha);
                         entradaValida = true;
 
                     }catch(FormatacaoMatriculaInvalidaException e){
@@ -67,6 +68,15 @@ public class Main {
                         System.err.println();
                     }
                 }while(!entradaValida);
+
+                if(usuarioLogado != null){
+                    if(usuarioLogado.getTipo().equals(TipoUsuario.ADMINISTRADOR)){
+                        MenuAdministrador menuAdmin = new MenuAdministrador();
+                        menuAdmin.iniciar(sc);
+                    }else{
+                        System.out.println("Funcionalidades para " + usuarioLogado.getTipo() + " ainda não implementadas.");
+                    }
+                }
 
             }else if(opcao == 2){
                 String matricula = null;
