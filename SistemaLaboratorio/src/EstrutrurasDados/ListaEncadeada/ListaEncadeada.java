@@ -47,7 +47,7 @@ public class ListaEncadeada<E> implements Lista<E>, Iterable<E>{
                 index ++;
             }
         }else{
-            throw new ListaVaziaException("Lista vazia.");
+            throw new ListaVaziaException();
         }
         
         return index;
@@ -70,7 +70,7 @@ public class ListaEncadeada<E> implements Lista<E>, Iterable<E>{
                 throw new ParametroNaoValidoException("Indice fora do limite");
             }
         }else{
-            throw new ListaVaziaException("Lista vazia.");
+            throw new ListaVaziaException();
         }
 
         return element;
@@ -148,7 +148,7 @@ public class ListaEncadeada<E> implements Lista<E>, Iterable<E>{
                 throw new ParametroNaoValidoException("Indice invalido.");
             }
         }else{
-            throw new ListaVaziaException("Lista vazia.");
+            throw new ListaVaziaException();
         }
 
         return dado;
